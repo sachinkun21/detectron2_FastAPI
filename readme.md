@@ -1,2 +1,2 @@
-python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
-uvicorn main:app --reload
+1. pip install -r requirements.txt
+3. uvicorn main:app --reload
