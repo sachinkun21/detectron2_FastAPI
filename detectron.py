@@ -28,15 +28,25 @@ cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set threshold for this model
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
 predictor = DefaultPredictor(cfg)
 
+def filter_objects(outputs,class_id=0):
+    person_indices = []
+    for i in range(len(outputs['instances'])):
+        if (outputs['instances'][i].pred_classes) == 0:
+            person_indices.append(i)
+
+    persons = outputs['instances'][person_indices]
+    return persons
 
 
 def predict_mask(img_path):
     img = cv2.imread('elon.jpg')
     outputs = predictor(img)
 
+    persons = filter_objects(outputs,0)
+
     # We can use `Visualizer` to draw the predictions on the image.
     v = Visualizer(img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
-    out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    out = v.draw_instance_predictions(persons.to("cpu"))
 
     mask_img = out.get_image()[:, :, ::-1]
     cv2.imwrite("elon_masked.jpg", mask_img)

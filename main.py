@@ -7,13 +7,16 @@ import cv2
 import base64
 import time
 
+
 app = FastAPI()
+
 
 @app.get('/')
 def home():
     return {"Welcome":"to FastAPI"}
 
-@app.get("/detectron2/{path}")
+
+@app.get("/detectron_person/{path}")
 def display_path(path: str, q: Optional[str] = None):
     try:
         start = time.time()
@@ -25,8 +28,7 @@ def display_path(path: str, q: Optional[str] = None):
         return {"error" : str(e)}
 
 
-
-@app.get("/detectron/{path}")
+@app.get("/detectron_b64/{path}")
 def display_path(path: str):
 
     img = cv2.imread('elon.jpg')
