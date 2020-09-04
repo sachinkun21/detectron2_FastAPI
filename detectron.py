@@ -39,7 +39,7 @@ def filter_objects(outputs,class_id=0):
 
 
 def predict_mask(img_path):
-    img = cv2.imread('elon.jpg')
+    img = cv2.imread(img_path)
     outputs = predictor(img)
 
     persons = filter_objects(outputs,0)
