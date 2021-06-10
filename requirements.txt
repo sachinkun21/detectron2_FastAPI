@@ -7,7 +7,7 @@ cloudpickle==1.5.0
 cycler==0.10.0
 Cython==0.29.21
 detectron2 @ git+https://github.com/facebookresearch/detectron2.git@be792b959bca9af0aacfa04799537856c7a92802
-fastapi==0.60.1
+fastapi==0.65.2
 future==0.18.2
 fvcore @ git+https://github.com/facebookresearch/fvcore.git@d313f9efd8aa55f091e6e699cac1231620b59871
 google-auth==1.20.0
